@@ -1,0 +1,24 @@
+acme_social:
+    twitter:
+        client_id: 123
+        client_secret: some_secret_twitter_value
+    facebook:
+        client_id: 456
+        client_secret: some_secret_facebook_value
+    common:
+        default_username: annonymous
+        max_daily_posts: 5
+        allow_comments_in_posts: true
+        hashtags:
+            - 'BestInConfig'
+            - 'MakeConfigGreatAgain'
+            - 'OneConfigToRuleThemAll'
+        engagement_targets:
+            -
+                type: like
+                ideal_reactions_count: 200
+                minimal_reactions_count: 100
+            -
+                type: share
+                ideal_reactions_count: 50
+                minimal_reactions_count: 20

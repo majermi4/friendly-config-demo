@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Acme\SocialBundle\Command\PostOnSocialMediaCommand:
+    Acme\SocialBundle\Service\TwitterClient:
+    Acme\SocialBundle\Service\FacebookClient:
+
+
+
