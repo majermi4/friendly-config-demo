@@ -1,4 +1,13 @@
 {
+    "majermi4/friendly-config": {
+        "version": "v1.1.2"
+    },
+    "nette/utils": {
+        "version": "v3.2.5"
+    },
+    "phpstan/phpdoc-parser": {
+        "version": "0.5.7"
+    },
     "psr/cache": {
         "version": "2.0.0"
     },

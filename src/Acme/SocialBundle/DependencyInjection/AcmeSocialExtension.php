@@ -4,27 +4,30 @@ declare(strict_types=1);
 namespace Acme\SocialBundle\DependencyInjection;
 
 use Acme\SocialBundle\Configuration\SocialBundleConfig;
+use Majermi4\FriendlyConfig\FriendlyConfiguration;
+use Majermi4\FriendlyConfig\RegisterConfigService;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class AcmeSocialExtension extends Extension
 {
+    public function getConfiguration(array $config, ContainerBuilder $container) : ConfigurationInterface
+    {
+        return FriendlyConfiguration::fromClass(SocialBundleConfig::class, 'acme_social');
+    }
+
     /**
      * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
+        RegisterConfigService::fromProcessedConfig(SocialBundleConfig::class, $config, $container);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-
-        $socialBundleConfigDefinition = new Definition(SocialBundleConfig::class, [$config]);
-        $socialBundleConfigDefinition->setFactory([SocialBundleConfig::class, 'fromRawConfig']);
-        $container->setDefinition(SocialBundleConfig::class, $socialBundleConfigDefinition);
     }
 }
